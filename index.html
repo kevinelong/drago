@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Game - 9x9 Board</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <div class="header-top">
+                <h1>Go Game</h1>
+                <div class="menu">
+                    <button id="menu-button" class="menu-button">☰</button>
+                    <div id="menu-dropdown" class="menu-dropdown">
+                        <button id="preferences-button">Preferences</button>
+                        <button id="rules-button">Rules</button>
+                        <button id="about-button">About</button>
+                    </div>
+                </div>
+            </div>
+            <div class="game-info">
+                <div class="current-player">
+                    <span>Current Player: </span>
+                    <span id="current-player">Black</span>
+                </div>
+                <div class="captured-stones">
+                    <span>Captured: </span>
+                    <span id="black-captured">0</span> (Black) | 
+                    <span id="white-captured">0</span> (White)
+                </div>
+            </div>
+        </header>
+
+        <!-- Preferences Dialog -->
+        <div id="preferences-dialog" class="dialog-overlay">
+            <div class="dialog">
+                <div class="dialog-header">
+                    <h2>Preferences</h2>
+                    <button id="close-preferences" class="close-button">×</button>
+                </div>
+                <div class="dialog-content">
+                    <div class="preference-group">
+                        <label for="board-size">Board Size:</label>
+                        <select id="board-size" class="preference-select">
+                            <option value="9">9×9</option>
+                            <option value="13">13×13</option>
+                            <option value="19">19×19</option>
+                            <option value="custom">Custom</option>
+                        </select>
+                    </div>
+                    <div id="custom-size-group" class="preference-group" style="display: none;">
+                        <label for="custom-size-input">Custom Size:</label>
+                        <input type="number" id="custom-size-input" class="preference-input" 
+                               min="5" max="50" value="23" placeholder="23">
+                    </div>
+                    <div class="dialog-buttons">
+                        <button id="apply-preferences" class="primary-button">Apply</button>
+                        <button id="cancel-preferences" class="secondary-button">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-board-container">
+            <!-- Stone bowls -->
+            <div class="stone-bowls">
+                <div class="bowl black-bowl" id="black-bowl">
+                    <h3>Black Stones</h3>
+                    <div class="stones-container" id="black-stones-container">
+                        <!-- Black stones will be generated here -->
+                    </div>
+                </div>
+                
+                <div class="bowl white-bowl" id="white-bowl">
+                    <h3>White Stones</h3>
+                    <div class="stones-container" id="white-stones-container">
+                        <!-- White stones will be generated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Go board -->
+            <div class="board-container">
+                <div class="go-board" id="go-board">
+                    <svg class="board-svg" width="600" height="600" viewBox="0 0 600 600">
+                        <!-- Grid lines will be generated here -->
+                    </svg>
+                    <div class="intersection-points" id="intersection-points">
+                        <!-- Intersection points will be generated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Captured bowls -->
+            <div class="captured-bowls">
+                <div class="captured-bowl black-captured-bowl" id="black-captured-bowl">
+                    <h3>Black Captured</h3>
+                    <div class="captured-stones-container" id="black-captured-container">
+                        <p>No stones captured</p>
+                    </div>
+                </div>
+                
+                <div class="captured-bowl white-captured-bowl" id="white-captured-bowl">
+                    <h3>White Captured</h3>
+                    <div class="captured-stones-container" id="white-captured-container">
+                        <p>No stones captured</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+            <button id="pass-button">Pass</button>
+            <button id="resign-button">Resign</button>
+            <button id="new-game-button">New Game</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

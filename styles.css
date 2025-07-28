@@ -1,0 +1,690 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.game-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+header {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin: 0;
+}
+
+/* Menu */
+.menu {
+    position: relative;
+}
+
+.menu-button {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+}
+
+.menu-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.menu-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 150px;
+    z-index: 1000;
+    display: none;
+}
+
+.menu-dropdown.show {
+    display: block;
+}
+
+.menu-dropdown button {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    color: #333;
+    transition: background-color 0.2s ease;
+}
+
+.menu-dropdown button:hover {
+    background-color: #f5f5f5;
+}
+
+/* Dialog */
+.dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.dialog-overlay.show {
+    display: flex;
+}
+
+.dialog {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.dialog-header h2 {
+    margin: 0;
+    color: #333;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-button:hover {
+    color: #333;
+}
+
+.dialog-content {
+    padding: 20px;
+}
+
+.preference-group {
+    margin-bottom: 20px;
+}
+
+.preference-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+}
+
+.preference-select,
+.preference-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.preference-select:focus,
+.preference-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+}
+
+.dialog-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.primary-button,
+.secondary-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.primary-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.primary-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.secondary-button {
+    background: #f8f9fa;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.secondary-button:hover {
+    background: #e9ecef;
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.current-player, .captured-stones {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+#current-player {
+    font-weight: bold;
+    color: #f39c12;
+}
+
+.game-board-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px;
+    gap: 20px;
+    min-height: 600px;
+}
+
+/* Stone bowls */
+.stone-bowls {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 200px;
+}
+
+.bowl {
+    background: linear-gradient(145deg, #e6e6e6, #ffffff);
+    border: 3px solid #333;
+    border-radius: 50%;
+    width: 180px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        inset 0 0 20px rgba(0, 0, 0, 0.1),
+        0 10px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.bowl h3 {
+    position: absolute;
+    top: 10px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #333;
+    z-index: 2;
+}
+
+.stones-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 20px;
+    max-width: 140px;
+    max-height: 140px;
+}
+
+/* Go board */
+.board-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 700px;
+}
+
+.go-board {
+    background: linear-gradient(145deg, #d4a574, #c19a6b);
+    border: 3px solid #8b4513;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.3),
+        inset 0 0 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.board-svg {
+    display: block;
+    background: transparent;
+}
+
+.board-svg line {
+    stroke: #8b4513;
+    stroke-width: 1;
+}
+
+.board-svg circle {
+    fill: #8b4513;
+}
+
+/* Intersection points */
+.intersection-points {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 560px;
+    height: 560px;
+    pointer-events: none;
+    transform-origin: top left;
+}
+
+.intersection-point {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+    transform: translate(-50%, -50%);
+    pointer-events: auto;
+}
+
+.intersection-point:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.intersection-point.star-point::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    background: #8b4513;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.intersection-point::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    background: #8b4513;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Stones */
+.stone {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: grab;
+    transition: all 0.2s ease;
+    position: relative;
+    z-index: 10;
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.3),
+        inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+/* Dynamic stone sizing based on board size */
+.board-size-9 .stone {
+    width: 32px;
+    height: 32px;
+}
+
+.board-size-13 .stone {
+    width: 24px;
+    height: 24px;
+}
+
+.board-size-19 .stone {
+    width: 18px;
+    height: 18px;
+}
+
+.board-size-custom .stone {
+    width: 16px;
+    height: 16px;
+}
+
+.stone.black {
+    background: radial-gradient(circle at 30% 30%, #666, #000);
+    border: 1px solid #333;
+}
+
+.stone.white {
+    background: radial-gradient(circle at 30% 30%, #fff, #ccc);
+    border: 1px solid #999;
+}
+
+.stone:hover {
+    transform: scale(1.1);
+    box-shadow: 
+        0 6px 12px rgba(0, 0, 0, 0.4),
+        inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.stone.dragging {
+    cursor: grabbing;
+    transform: scale(1.2);
+    z-index: 1000;
+    opacity: 0.8;
+}
+
+.stone.on-board {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+}
+
+/* Captured bowls */
+.captured-bowls {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 200px;
+}
+
+.captured-bowl {
+    background: linear-gradient(145deg, #e6e6e6, #ffffff);
+    border: 3px solid #333;
+    border-radius: 50%;
+    width: 180px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+        inset 0 0 20px rgba(0, 0, 0, 0.1),
+        0 10px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.captured-bowl h3 {
+    position: absolute;
+    top: 10px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #333;
+    z-index: 2;
+}
+
+.captured-stones-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    padding: 20px;
+    max-width: 140px;
+    max-height: 140px;
+}
+
+.captured-stone {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    opacity: 0.7;
+}
+
+.captured-stone.black {
+    background: radial-gradient(circle at 30% 30%, #666, #000);
+    border: 1px solid #333;
+}
+
+.captured-stone.white {
+    background: radial-gradient(circle at 30% 30%, #fff, #ccc);
+    border: 1px solid #999;
+}
+
+/* Controls */
+.controls {
+    background: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #dee2e6;
+}
+
+.controls button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    margin: 0 10px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.controls button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.controls button:active {
+    transform: translateY(0);
+}
+
+/* Drag and drop visual feedback */
+.drag-over {
+    background-color: rgba(255, 255, 0, 0.3) !important;
+    border: 2px dashed #ff6b6b !important;
+}
+
+.drop-zone {
+    transition: all 0.2s ease;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+    .game-board-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .stone-bowls, .captured-bowls {
+        flex-direction: row;
+        gap: 20px;
+    }
+    
+    .bowl, .captured-bowl {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .go-board {
+        padding: 15px;
+    }
+    
+    .board-svg {
+        width: 500px;
+        height: 500px;
+    }
+    
+    .intersection-points {
+        /* Width and height set dynamically by JavaScript */
+        width: calc(500px * var(--scale-factor, 1)) !important;
+        height: calc(500px * var(--scale-factor, 1)) !important;
+    }
+    
+    /* Adjust stone sizes for smaller screens */
+    .board-size-9 .stone {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .board-size-13 .stone {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .board-size-19 .stone {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .board-size-custom .stone {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .game-container {
+        margin: 10px;
+        border-radius: 15px;
+    }
+    
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    .game-info {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .board-svg {
+        width: 400px;
+        height: 400px;
+    }
+    
+    .intersection-points {
+        /* Width and height set dynamically by JavaScript */
+        width: calc(400px * var(--scale-factor, 1)) !important;
+        height: calc(400px * var(--scale-factor, 1)) !important;
+    }
+    
+    /* Adjust stone sizes for mobile */
+    .board-size-9 .stone {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .board-size-13 .stone {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .board-size-19 .stone {
+        width: 12px;
+        height: 12px;
+    }
+    
+    .board-size-custom .stone {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .controls button {
+        margin: 5px;
+        padding: 10px 20px;
+    }
+}
+
+/* Animation for stone placement */
+@keyframes stonePlace {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+.stone.place-animation {
+    animation: stonePlace 0.3s ease-out;
+}
+
+/* Animation for stone capture */
+@keyframes stoneCapture {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+}
+
+.stone.capture-animation {
+    animation: stoneCapture 0.3s ease-in;
+} 
